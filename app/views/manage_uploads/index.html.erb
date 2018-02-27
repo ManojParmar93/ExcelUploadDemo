@@ -1,0 +1,9 @@
+<h3>upload Excel files</h3>
+<%= link_to 'Sample File', 'sample_excel.xlsx', title: 'sample file for format.' %><br>
+<%= form_tag( manage_uploads_upload_file_and_manage_users_path , method: :post, multipart: true) do %>
+  <%= label_tag :excel_files, "Upload File" %>
+  <%= file_field_tag 'excel_files[]', accept: ".xlsx, .xls, .csv", multiple: true %></br>
+  <%= submit_tag("Upload") %>
+<% end %>
+<br>
+<%= link_to 'Saved Data', manage_uploads_display_records_path %>
