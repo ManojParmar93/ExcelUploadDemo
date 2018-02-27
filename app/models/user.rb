@@ -17,6 +17,7 @@ class User < ApplicationRecord
       (2..excel_file.last_row).each do |row|
         create(prepare_data(headers, excel_file, row))
       end
+      FileUtils.remove_file(file, force: true)
     end
   end
 
@@ -26,7 +27,7 @@ class User < ApplicationRecord
   end
 
   def self.open_spreadsheet(file)
-    Roo::Spreadsheet.open(file.tempfile, extension: :xlsx)
+    Roo::Spreadsheet.open(file, extension: :xlsx)
   end
 
   def self.reject_if_unknown_file(files)

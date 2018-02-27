@@ -6,23 +6,33 @@ class ManageUploadsController < ApplicationController
 
   def upload_file_and_manage_users
     User.reject_if_unknown_file(files_from_params)
-    User.create_from_file(files_from_params)
-    redirected_to root_path
-  rescue => exception
-    flash[:notice] = exception.message
-    render :index
-  end
+    
+    User.delay.create_from_file(collect_temp_files)
+    redirect_to root_path
+  # rescue => exception
+  #   flash[:notice] = exception.message
+  #   render :index
+end
 
-  def display_records
-  end
+def display_records
+end
 
-  private
+private
 
-  def set_users
-    @users = User.all
-  end
+def set_users
+  @users = User.all
+end
 
-  def files_from_params
-    params.require(:excel_files)
+def files_from_params
+  params.require(:excel_files)
+end
+
+def collect_temp_files
+  files_from_params.collect do |file|
+    tmp = file.tempfile
+    destiny_file = File.join('public', 'uploads', file.original_filename)
+    FileUtils.move "//#{tmp.path}", destiny_file
+    destiny_file
   end
+end
 end
