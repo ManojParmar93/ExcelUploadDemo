@@ -1,6 +1,7 @@
 require 'roo'
 
 class NotSupportedFile < StandardError; end;
+class ToLargeFile < StandardError; end;
 
 class User < ApplicationRecord
   SUPPORTED_FORMATES = %w(.csv .xls .xlsx)
