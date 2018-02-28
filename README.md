@@ -1,24 +1,11 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Follow the below steps to setup project in local
 
-Things you may want to cover:
+* clone project and bundle
 
-* Ruby version
+* rake db:create
 
-* System dependencies
+* rake db:migrate
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+* rake jobs:work (run in new tabe for backgound file processing)
