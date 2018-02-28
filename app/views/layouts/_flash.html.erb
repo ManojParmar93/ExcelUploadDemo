@@ -1,0 +1,10 @@
+<% if flash.present? %>
+  <ul>
+    <% flash.each do |type, message| %>
+      <li>
+        <%= message%>
+      </li>
+    <% end %>
+    <% flash.clear %>
+  </ul>
+<% end %>
